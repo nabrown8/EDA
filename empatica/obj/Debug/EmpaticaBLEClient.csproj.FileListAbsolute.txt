@@ -13,3 +13,16 @@ C:\Users\carlo\Documents\GitHub\EDA\empatica\bin\Debug\System.Xml.Linq.dll
 C:\Users\carlo\Documents\GitHub\EDA\empatica\obj\Debug\EmpaticaBLEClient.csproj.CopyComplete
 C:\Users\carlo\Documents\GitHub\EDA\empatica\obj\Debug\EmpaticaBLEClient.exe
 C:\Users\carlo\Documents\GitHub\EDA\empatica\obj\Debug\EmpaticaBLEClient.pdb
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\EmpaticaBLEClient.exe.config
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\EmpaticaBLEClient.exe
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\EmpaticaBLEClient.pdb
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\Microsoft.CSharp.dll
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\System.Data.DataSetExtensions.dll
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\System.Data.dll
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\System.dll
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\System.Xml.dll
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\bin\Debug\System.Xml.Linq.dll
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\obj\Debug\EmpaticaBLEClient.csproj.AssemblyReference.cache
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\obj\Debug\EmpaticaBLEClient.csproj.CoreCompileInputs.cache
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\obj\Debug\EmpaticaBLEClient.exe
+C:\Users\carlo\OneDrive\Escritorio\EDA\empatica\obj\Debug\EmpaticaBLEClient.pdb

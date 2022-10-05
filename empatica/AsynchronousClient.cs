@@ -4,6 +4,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.IO;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
+
 
 
 namespace EmpaticaBLEClient
@@ -48,9 +51,18 @@ namespace EmpaticaBLEClient
                 Console.WriteLine("Connection with Empatica established. Press any key to start data collection");
                 Console.ReadLine();
 
-                var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
-                String time = timestamp.ToString();
-                File.WriteAllText("C:\\Users\\carlo\\Desktop\\empatica server data\\data.csv", time);
+                var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                String time = timestamp.ToString() + '\n';
+                try
+                {
+                    File.WriteAllText("..\\..\\data.csv", time);
+                }
+                catch
+                {
+                    System.Threading.Thread.Sleep(100);
+                }
+
+                Console.WriteLine("BVP and GSR collection has started. Type 'device_disconnect' to exit");
 
                 Send(client, "device_subscribe gsr ON" + Environment.NewLine);
                 SendDone.WaitOne();
@@ -151,8 +163,9 @@ namespace EmpaticaBLEClient
                         _response = state.Sb.ToString();
                     }
                     // Signal that all bytes have been received.
+
                     ReceiveDone.Set();
-                    File.AppendAllText("C:\\Users\\carlo\\Desktop\\empatica server data\\data.csv", csv.ToString());
+                    File.AppendAllText("..\\..\\data.csv", csv.ToString());
                     Environment.Exit(0);
                 }
                 
@@ -191,9 +204,42 @@ namespace EmpaticaBLEClient
 
         private static void HandleResponseFromEmpaticaBLEServer(string response)
         {
+            var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            String time =timestamp.ToString()+',';
+            response = response.Replace(" ", ",");
             //Console.Write(response);
-            csv.AppendLine(response);
+            csv.Append(response + time);
+            
 
+        }
+
+        public static void Wait(int milliseconds)
+        {
+            var timer1 = new System.Windows.Forms.Timer();
+            if (milliseconds == 0 || milliseconds < 0) return;
+
+            // Console.WriteLine("start wait timer");
+            timer1.Interval = milliseconds;
+            timer1.Enabled = true;
+            timer1.Start();
+
+            timer1.Tick += (s, e) =>
+            {
+                timer1.Enabled = false;
+                timer1.Stop();
+                // Console.WriteLine("stop wait timer");
+            };
+
+            while (timer1.Enabled)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        private static readonly Regex sWhitespace = new Regex(@"\s+");
+        public static string ReplaceWhitespace(string input, string replacement)
+        {
+            return sWhitespace.Replace(input, replacement);
         }
     }
 }
