@@ -14,14 +14,22 @@ def default_handler(address, *args):
         for edaVals in args:
             print(edaVals)
             header.append(edaVals)
-            with open('EDAReadings.csv', 'a') as f:
+            with open('EDAReadings.csv', 'x') as f:
                 writer = csv.writer(f)
                 writer.writerow(header)
 
-    
+def setup_file():
+        startTime = time.time()
+        try:
+            with open('EmotiBit' + str(startTime) + '.csv', 'x') as f:
+                writer = csv.writer(f)
+                writer.writerow(['Timestamp', 'EDA'])
+        except:
+            print("File already exists.")
 
 
 dispatcher = Dispatcher()
+setup_file()
 dispatcher.map("/something/*", print_handler)
 dispatcher.set_default_handler(default_handler)
 
