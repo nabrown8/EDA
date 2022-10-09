@@ -14,11 +14,12 @@ def default_handler(address, *args):
         for edaVals in args:
             print(edaVals)
             header.append(edaVals)
-            with open('EDAReadings.csv', 'x') as f:
+            with open('EmotiBit' + str(startTime) + '.csv', 'a') as f:
                 writer = csv.writer(f)
                 writer.writerow(header)
 
 def setup_file():
+        global startTime
         startTime = time.time()
         try:
             with open('EmotiBit' + str(startTime) + '.csv', 'x') as f:
