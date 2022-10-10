@@ -1,3 +1,4 @@
+import dataserver
 
 with open("data2.csv", 'r+') as f:
     d = f.readlines()
