@@ -1,5 +1,6 @@
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import BlockingOSCUDPServer
+import subprocess
 import csv
 import time
 
@@ -19,6 +20,7 @@ def default_handler(address, *args):
                 writer.writerow(header)
 
 def setup_file():
+        subprocess.call("empatica\obj\Debug\EmpaticaBLEClient.exe", shell=True)
         global startTime
         startTime = time.time()
         try:
