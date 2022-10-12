@@ -53,14 +53,22 @@ namespace EmpaticaBLEClient
 
                 var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 String time = timestamp.ToString() + '\n';
+                String header = "System_Epoch,Category,E4_Epoch,Value\n";
+
+                //If you don't put the thread to sleep for a bit it locks the file and gives you an error later
                 try
                 {
-                    File.WriteAllText("..\\..\\data.csv", time);
+                    File.WriteAllText("..\\..\\data2.csv", time + header);
                 }
                 catch
                 {
                     System.Threading.Thread.Sleep(100);
                 }
+
+                //If you want to turn on any other sensor then just copy and paste the 4 lines down below
+                //and just change the 3 letters for the sensor that you want
+
+                //If you want to mess with the formatting look at the HandleResponseFromEmpaticaServer function
 
                 Console.WriteLine("BVP and GSR collection has started. Type 'device_disconnect' to exit");
 
@@ -165,7 +173,7 @@ namespace EmpaticaBLEClient
                     // Signal that all bytes have been received.
 
                     ReceiveDone.Set();
-                    File.AppendAllText("..\\..\\data.csv", csv.ToString());
+                    File.AppendAllText("..\\..\\data2.csv", csv.ToString());
                     Environment.Exit(0);
                 }
                 
@@ -204,6 +212,7 @@ namespace EmpaticaBLEClient
 
         private static void HandleResponseFromEmpaticaBLEServer(string response)
         {
+                        
             var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             String time =timestamp.ToString()+',';
             response = response.Replace(" ", ",");

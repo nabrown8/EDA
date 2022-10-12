@@ -1,4 +1,5 @@
-with open("data.csv", 'r+') as f:
+with open("data2.csv", 'r+') as f:
+
     d = f.readlines()
     f.seek(0)
     for i in d:
@@ -9,7 +10,7 @@ with open("data.csv", 'r+') as f:
 f.close()
 
 
-with open("data.csv", 'r+') as f:
+with open("data2.csv", 'r+') as f:
     d = f.readlines()
     f.seek(0)
     for i in d:
