@@ -1,6 +1,5 @@
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import BlockingOSCUDPServer
-import subprocess
 import csv
 import time
 
@@ -17,10 +16,12 @@ def default_handler(address, *args):
             header.append(edaVals)
             with open('EmotiBit' + str(startTime) + '.csv', 'a') as f:
                 writer = csv.writer(f)
-                writer.writerow(header)
+                for x in header:
+                    if x == 0: break
+                    uniqStamp = [header[0], header[x]]
+                    writer.writerow(uniqStamp)
 
 def setup_file():
-        subprocess.call("empatica\obj\Debug\EmpaticaBLEClient.exe", shell=True)
         global startTime
         startTime = time.time()
         try:
