@@ -1,6 +1,5 @@
-import dataserver
-
 with open("data2.csv", 'r+') as f:
+
     d = f.readlines()
     f.seek(0)
     for i in d:
