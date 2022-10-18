@@ -16,9 +16,9 @@ def default_handler(address, *args):
             header.append(edaVals)
             with open('EmotiBit' + str(startTime) + '.csv', 'a') as f:
                 writer = csv.writer(f)
-                for x in header:
-                    if x == 0: break
-                    uniqStamp = [header[0], header[x]]
+                for x in header[1:]:
+                    uniqStamp = [header[0]]
+                    uniqStamp.append(x)
                     writer.writerow(uniqStamp)
 
 def setup_file():
