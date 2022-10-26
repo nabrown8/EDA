@@ -48,17 +48,16 @@ namespace EmpaticaBLEClient
                 Receive(client);
                 ReceiveDone.WaitOne();
 
-                Console.WriteLine("Connection with Empatica established. Press any key to start data collection");
-                Console.ReadLine();
+                Console.WriteLine("Connection with Empatica established");
 
                 var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 String time = timestamp.ToString() + '\n';
-                String header = "System_Epoch,Category,E4_Epoch,Value\n";
+                String header = "System Epoch,Device,Category,E4 Epoch,Value\n";
 
                 //If you don't put the thread to sleep for a bit it locks the file and gives you an error later
                 try
                 {
-                    File.WriteAllText("..\\..\\data2.csv", time + header);
+                    File.WriteAllText("..\\..\\data2.csv", header);
                 }
                 catch
                 {
@@ -77,10 +76,10 @@ namespace EmpaticaBLEClient
                 Receive(client);
                 ReceiveDone.WaitOne();
 
-                Send(client, "device_subscribe bvp ON" + Environment.NewLine);
-                SendDone.WaitOne();
-                Receive(client);
-                ReceiveDone.WaitOne();
+                //Send(client, "device_subscribe bvp ON" + Environment.NewLine);
+                //SendDone.WaitOne();
+                //Receive(client);
+                //ReceiveDone.WaitOne();
 
 
                 while (true)
@@ -173,7 +172,7 @@ namespace EmpaticaBLEClient
                     // Signal that all bytes have been received.
 
                     ReceiveDone.Set();
-                    File.AppendAllText("..\\..\\data2.csv", csv.ToString());
+                    //File.AppendAllText("..\\..\\data2.csv", csv.ToString());
                     Environment.Exit(0);
                 }
                 
@@ -216,9 +215,11 @@ namespace EmpaticaBLEClient
             var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
             String time =timestamp.ToString()+',';
             response = response.Replace(" ", ",");
-            //Console.Write(response);
-            csv.Append(response + time);
-            
+            response = response.Insert(0, time);
+            Console.Write(response);
+            //csv.Append(response + time);
+            File.AppendAllText("..\\..\\data2.csv", response);
+
 
         }
 

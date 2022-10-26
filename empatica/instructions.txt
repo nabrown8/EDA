@@ -1,0 +1,13 @@
+Note that if you have a different version of python the shell script might not work
+On launcher.sh
+line 4:
+cygstart "/cygdrive/c/Users/carlo/AppData/Local/Microsoft/WindowsApps/python3.9.exe (replace this witht the proper python path in machine as well as the proper version of python)" -i dataserver.py & bin/Debug/EmpaticaBLEClient.exe && fg
+***Path to python.exe can be found by inputting the 'where python' command in cygwin***
+Instructions for Cygwin
+cd /
+**** this step only has to be taken once
+mkdir c
+*****
+mount c: /c
+cd "Path to launcher.sh"
+./launcher.sh
