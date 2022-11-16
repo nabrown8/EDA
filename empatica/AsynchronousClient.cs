@@ -209,6 +209,8 @@ namespace EmpaticaBLEClient
             }
         }
 
+        private static Object thisLock = new Object();
+
         private static void HandleResponseFromEmpaticaBLEServer(string response)
         {
                         
@@ -218,8 +220,10 @@ namespace EmpaticaBLEClient
             response = response.Insert(0, time);
             Console.Write(response);
             //csv.Append(response + time);
-            File.AppendAllText("..\\..\\data2.csv", response);
-
+            lock (thisLock)
+            {
+                File.AppendAllText("..\\..\\data2.csv", response);
+            }
 
         }
 
