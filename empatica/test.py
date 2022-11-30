@@ -1,3 +1,4 @@
+import time
 with open("data2.csv", 'r+') as f:
 
     d = f.readlines()
@@ -24,7 +25,10 @@ with open("data2.csv", "r+") as input:
       
     # Creating "gfg output file.txt" as output
     # file in write mode
-    with open("data6.csv", "w+") as output:
+
+    global startTime
+    startTime = time.time()
+    with open('Empatica' + str(startTime) + '.csv', 'w+') as output:
         d = input.readlines()
         input.seek(0)
         last_epoch = []
